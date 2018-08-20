@@ -13,6 +13,7 @@ var assign = require('object-assign');
 var prettyBytes = require('pretty-bytes');
 var chalk = require('chalk');
 var Fontmin = require('fontmin');
+var wawoff2 = require('fontmin-wawoff2');
 
 /**
  * rename
@@ -95,11 +96,13 @@ module.exports = function (opts) {
                 path: file.path
             }))
             .use(Fontmin.glyph(opts))
-            .use(Fontmin.ttf2eot())
+//            .use(Fontmin.ttf2eot())
             .use(Fontmin.ttf2woff())
-            .use(Fontmin.ttf2svg())
-            .use(Fontmin.css(opts));
-
+//            .use(Fontmin.ttf2svg())
+//            .use(Fontmin.css(opts))
+            .use(wawoff2())
+//            .dest('./');
+        
         if (opts.use) {
             opts.use.forEach(fontmin.use.bind(fontmin));
         }
